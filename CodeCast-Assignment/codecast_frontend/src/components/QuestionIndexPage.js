@@ -3,6 +3,7 @@ import { Question, Answer } from '../requests';
 import { Link } from 'react-router-dom';
 import NewAnswerForm from './NewAnswerForm'
 import NewQuestionForm from './NewQuestionForm'
+import './QuestionIndexPage.css'
 
 class QuestionIndexPage extends Component {
   constructor(props) {
@@ -23,9 +24,6 @@ class QuestionIndexPage extends Component {
   componentDidMount() {
     Question.index()
       .then(questions => {
-        console.log('questions', questions)
-        console.log('answers', questions[1].answers)
-        console.log('comments', questions[1].comments)
         this.setState((state) => {
           return {
             questions: questions
@@ -49,8 +47,10 @@ class QuestionIndexPage extends Component {
 
   render() {
     return(
-        <main>
-        <h1>Question Index Page</h1>
+        <main className='main'>
+        <h1> Create New Question </h1>
+        <NewQuestionForm></NewQuestionForm>
+        <h1>Question Index Page </h1>
         <div>
           {this.state.questions.map((question) => {
             return(
@@ -69,9 +69,7 @@ class QuestionIndexPage extends Component {
                         </div>
                       )
                     })}
-                    {/* <button data-id={pet.id} onClick={this.deletePet}>Delete</button> */}
                     <NewAnswerForm question={question} onSubmit={this.createAnswer}></NewAnswerForm>
-                    <NewQuestionForm></NewQuestionForm>
                  </div>
                </>)
           })}

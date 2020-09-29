@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Question } from '../requests';
+import './NewQuestionForm.css';
 
 class NewQuestionForm extends Component {
     constructor(props) {
@@ -32,7 +33,7 @@ class NewQuestionForm extends Component {
         Question.create(this.state.newQuestionParams)
           .then(res => {
             if(res.id) {
-            //   this.props.history.push(`/questions/`)
+              this.forceUpdate();
             }
             if (res.errors) {
               this.setState(() => {
@@ -48,20 +49,20 @@ class NewQuestionForm extends Component {
           return(
         <>
         <div>
-          <form onSubmit={(event) => { 
+          <form className='questionform-form' onSubmit={(event) => { 
              event.preventDefault();
              this.createQuestion();
            }}>
-            <div>
-               <input type='text' name='title' id='title' autoComplete='off' required onInput={this.updateQuestionParams} value={this.state.newQuestionParams.title}></input>
-               <label for='title'> <span> Title </span> </label>
+            <div className='questionform-container'>
+               <input className='questionform-input' type='text' name='title' id='title' autoComplete='off' required onInput={this.updateQuestionParams} value={this.state.newQuestionParams.title}></input>
+               <label className='questionform-label' htmlFor='title'> <span> Title </span> </label>
             </div>
-            <div>
-               <input type='text' name='body' id='body' autoComplete='off' required onInput={this.updateQuestionParams} value={this.state.newQuestionParams.body} ></input>
-               <label for='body'> <span> Question </span> </label>
+            <div className='questionform-container'>
+               <input className='questionform-input' type='text' name='body' id='body' autoComplete='off' required onInput={this.updateQuestionParams} value={this.state.newQuestionParams.body} ></input>
+               <label className='questionform-label' htmlFor='body'> <span> Question </span> </label>
             </div>
-            <div>
-            <input type='submit' value='Create Question'/>
+            <div className='questionform-container'>
+            <input className='questionform-submit' type='submit' value='Create Question'/>
          </div>
             </form>
         </div>

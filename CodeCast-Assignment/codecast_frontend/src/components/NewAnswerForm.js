@@ -12,13 +12,13 @@ function NewAnswerForm(props) {
   }
 
   return (
-    <form onSubmit={handleAnswerSubmit}>
-      <div>
-          <input type='text' name='body' autoComplete='off' required ></input>
-          <label for='body'> <span> Place your answer here </span> </label>
+    <form className='questionform-form' onSubmit={handleAnswerSubmit}>
+      <div className='questionform-container'>
+          <input className='questionform-input' type='text' name='body' autoComplete='off' required ></input>
+          <label className='questionform-label' for='body'> <span> Place your answer here </span> </label>
       </div>
-      <div>
-          <input type='submit' value='Create answer'></input>
+      <div className='questionform-container'>
+          <input className='questionform-submit' type='submit' value='Create answer'></input>
       </div>
     </form>
   );
