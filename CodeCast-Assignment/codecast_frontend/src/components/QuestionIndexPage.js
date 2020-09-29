@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Question } from '../requests';
+import { Question, Answer } from '../requests';
 import { Link } from 'react-router-dom';
-
+import NewAnswerForm from './NewAnswerForm'
+import NewQuestionForm from './NewQuestionForm'
 
 class QuestionIndexPage extends Component {
   constructor(props) {
@@ -10,6 +11,14 @@ class QuestionIndexPage extends Component {
       questions: [],
     }
   }
+
+  createAnswer = (id, params) => {
+    Answer.create(id, params).then(answer => {
+      if (answer.errors) {
+        this.setState({ errors: answer.errors });
+      }
+    });
+  };
 
   componentDidMount() {
     Question.index()
@@ -61,9 +70,12 @@ class QuestionIndexPage extends Component {
                       )
                     })}
                     {/* <button data-id={pet.id} onClick={this.deletePet}>Delete</button> */}
+                    <NewAnswerForm question={question} onSubmit={this.createAnswer}></NewAnswerForm>
+                    <NewQuestionForm></NewQuestionForm>
                  </div>
                </>)
           })}
+          
           </div>
       </main>
     )
