@@ -16,7 +16,7 @@ class QuestionIndexPage extends Component {
       .then(questions => {
         console.log('questions', questions)
         console.log('answers', questions[1].answers)
-        console.log('comments', questions[1].answers[1].comment)
+        console.log('comments', questions[1].comments)
         this.setState((state) => {
           return {
             questions: questions
@@ -48,9 +48,21 @@ class QuestionIndexPage extends Component {
               <>
                 <div key={question.id}>
                     <div><Link to={`/questions/${question.id}`}> <h1> {question.title} </h1> </Link></div>
+                    { question.answers.map((answer) => {
+                      return(
+                        <div key={answer.id}>
+                          <h3> {answer.body} </h3>
+                          {question.comments.map((comment) => {
+                            if (comment.answer_id === answer.id) {
+                              return(<div key={comment.id}><p>{comment.comment}</p></div>)
+                            }
+                          })}
+                        </div>
+                      )
+                    })}
                     {/* <button data-id={pet.id} onClick={this.deletePet}>Delete</button> */}
                  </div>
-                 </>)
+               </>)
           })}
           </div>
       </main>
