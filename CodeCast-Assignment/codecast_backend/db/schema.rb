@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2020_09_28_180622) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string "comments"
+    t.string "comment"
     t.bigint "answer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

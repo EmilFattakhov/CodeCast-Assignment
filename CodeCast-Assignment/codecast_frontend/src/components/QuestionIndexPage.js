@@ -16,6 +16,7 @@ class QuestionIndexPage extends Component {
       .then(questions => {
         console.log('questions', questions)
         console.log('answers', questions[1].answers)
+        console.log('comments', questions[1].answers[1].comment)
         this.setState((state) => {
           return {
             questions: questions

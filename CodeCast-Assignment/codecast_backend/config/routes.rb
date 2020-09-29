@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :questions do
         resources :answers do
-          resources :comments
+          resources :comment 
         end
       end
     end
