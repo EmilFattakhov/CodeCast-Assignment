@@ -23,7 +23,7 @@ export const Question = {
       return fetch(`${BASE_URL}/questions/${id}`, {
         method: 'DELETE',
         credentials: 'include'
-      }).then(res => res.json());
+      });
     }
   }
 
@@ -37,5 +37,11 @@ export const Question = {
         },
         body: JSON.stringify(params)
       }).then(res => res.json());
+    },
+    delete(id) {
+      return fetch(`${BASE_URL}/questions/${id}/answers)`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
     }
   };

@@ -11,6 +11,7 @@ class QuestionIndexPage extends Component {
     this.state = {
       questions: [],
     }
+    
   }
 
   createAnswer = (id, params) => {
@@ -22,6 +23,10 @@ class QuestionIndexPage extends Component {
   };
 
   componentDidMount() {
+    this.showQuestions();
+  }
+
+  showQuestions() {
     Question.index()
       .then(questions => {
         this.setState((state) => {
@@ -31,19 +36,16 @@ class QuestionIndexPage extends Component {
         })
       });
   }
-
- 
-  handleDeleteButtonClick(event, id) {
-    this.setState((currentState, currentProps) => {
-      const questionsCopy = [...currentState.questions];
-      const updatedArray = questionsCopy.filter((q) => {
-        return q.id !== id
-      })
-      return {
-        questions: updatedArray
-      }
-    })
-  }
+  deleteQuestion(id) {
+    Question.delete(id).then(res => {
+      if (res.errors) {
+        this.setState({errors: res.errors})
+      }  
+    }).then( () => {
+      this.showQuestions();
+    });
+  };  
+  
 
   render() {
     return(
@@ -57,6 +59,7 @@ class QuestionIndexPage extends Component {
               <>
                 <div key={question.id}>
                     <div><Link to={`/questions/${question.id}`}> <h1> {question.title} </h1> </Link></div>
+                    <div className='question-delete-button'> <button onClick={ () => this.deleteQuestion(question.id)}>Delete Question</button> </div>
                     { question.answers.map((answer) => {
                       return(
                         <div key={answer.id}>
